@@ -1,0 +1,66 @@
+\section{Introdução}
+\label{sec:intro}
+
+A utilização de ferramentas de \textit{Deep Learning} para identificação de indivíduos arbóreos vem crescendo a cada ano. Modelos de redes neurais profundas, especialmente arquiteturas como CNNs (\textit{Convolutional Neural Networks}), são treinados para analisar imagens aéreas, de drones e satélites, a fim de reconhecer padrões únicos de copas de árvores, espécies específicas e até mesmo estimar biomassa, como presente nos trabalhos de \cite{huang2024tree, gevaert2024explainable, hiraguri2023shape}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{imagens/cerrado_deeplearning.jpg}
+    \caption{Publicações com as palavras chave Cerrado e Deep Lerning/Machine Learning}
+    \label{fig:scopus}
+\end{figure}
+
+Em uma pesquisa na base de periódicos Scopus, com as palavras chave "Cerrado", "Deep Learning" e "Machine Learning", foi possível obter 111 artigos publicados nos últimos 10 anos (2014 - 2024), com uma crescente a partir de 2018 (Figura \ref{fig:scopus}).
+
+
+O Buriti (\textit{Mauritia flexuosa}) (\ref{fig:buriti}) é uma palmeira nativa das regiões tropicais da América do Sul, que pode atingir de 30 a 40 metros de altura, especialmente encontrada no Brasil, Venezuela, Colômbia, Peru e Bolívia. No Brasil, destaca-se em ecossistemas como o Cerrado, a Amazônia e o Pantanal, sendo frequentemente associado a áreas alagadas, conhecidas como veredas ~\cite{buriti1}.
+
+Esta espécie desempenha papéis importantes na biodiversidade, economia e nutrição. Suas raízes ajudam a manter a umidade do solo, preservando veredas e nascentes. Fornece alimento e abrigo para diversas espécies de aves, mamíferos, insetos e peixes, além de possuir um indicador ambiental, uma vez que sua presença está associada a áreas de solos férteis e disponibilidade de água ~\cite{buriti2}. 
+
+Além disso, de seu fruto pode ser extraído o Óleo de Buriti que é rico em carotenoides e usado nas indústrias de cosméticos (hidratantes, protetores solares) e alimentícia, podendo ainda ser comercializado em natura para produção de polpa, sucos e doces. Suas fibras são utilizadas na confecção de esteiras, chapéus e cestos, sustentando comunidades tradicionais ~\cite{florabrasileira}.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{imagens/Mauritia-flexuosa-7-1024x1024.jpg}
+    \caption{Exemplares de Buriti. Foto: Marcelo Kuhlmann.}
+    \label{fig:buriti}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\linewidth]{imagens/Palmito.jpg}
+    \caption{Exemplares de Palmito Juçara. Foto: John DeMott.}
+    \label{fig:palmito}
+\end{figure}
+
+O Palmito Juçara ou Palmiteiro (\textit{Euterpe edulis}) (\ref{fig:palmito}) pode atingir entre 5 e 12 metros de altura, com um único estipe (caule), reto, cilíndrico, de porte médio a alto. Portanto, ele não forma perfilhos como o açaí e não rebrota quando cortado. Suas folhas são alternas, pinadas, em número de 8 a 15, com até 3 metros de comprimento. 
+
+Ocorre naturalmente do sul da Bahia e Minas Gerais até o Rio Grande do Sul na Mata Atlântica e em Goiás, Mato Grosso do Sul, São Paulo e Paraná nas matas ciliares da bacia do rio Paraná ~\cite{palmiteiro}.
+
+Considerado vulnerável à extinção devido ao desmatamento e à intensa extração ilegal, conforme registrado no Livro Vermelho da Flora do Brasil ~\cite{livrovermelho}, sua preservação depende diretamente da conservação adequada da mata nativa. Sua principal ameaça é a extração predatória do palmito, que ocorre por meio do corte completo do indivíduo, comprometendo a regeneração natural da população.
+
+Situada a 35 km ao sul do centro de Brasília/DF, a Reserva Ecológica do Instituto Brasileiro de Geografia e Estatística (IBGE), ou Reserva Ecológica do Roncador (RECOR), possui uma área de 1.350 ha, com todos os tipos fisionômicos do Cerrado. Em conjunto com o Jardim Botânico de Brasília (JBB) e a Fazenda Água Limpa (FAL-UnB), soma aproximadamente 10.000 ha da área core de preservação da Área de Proteção Ambiental (APA) dos Ribeirões do Gama e Cabeça-de-Veado e da Reserva da Biosfera do Cerrado (~\cite{unesco2002vegetaccao}).
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{imagens/localizacao-baixa.jpg}
+    \caption{Localização da Reserva Ecológica do IBGE.}
+    \label{fig:loc.ibge}
+\end{figure}
+
+Destaca-se como uma área de conservação dedicada à pesquisa e preservação do Cerrado, contribuindo significativamente para o estudo da flora, fauna e dinâmica ecológica desse bioma, além de servir como um espaço fundamental para a conscientização ambiental e o desenvolvimento de práticas sustentáveis que beneficiam tanto a população local quanto a conservação em longo prazo ~\cite{camara2008musgos}.
+
+
+
+
+
+
+
+Neste projeto foi utilizado como referência o trabalho de Yian Zhao \etal ~\cite{artigo2}, no qual foi proposto um detector de objetos em tempo real denominado RT-DETR \textit{ Real-Time DEtection TRansformer}, baseado na arquitetura \textit{Transformers}, e testado na base de imagens \textit{COCO (Common Objects in Context)}. Segundo os autores, essa arquitetura elimina a necessidade de NMS (Supressão Não Máxima) no pós-processamento, técnica que visa selecionar a melhor caixa delimitadora de um conjunto de caixas sobrepostas. 
+
+
+O objetivo deste projeto é realizar a identificação de duas espécies arbóreas presentes no Cerrado utilizando o método RT-DETR com base em imagens aéreas obtidas com auxilio de drone de algumas regiões na Reserva Ecológicoa do IBGE, localizada em Brasília-DF, tendo como suporte a equipe de Biólogos e especialistas em botânica da Reserva. 
+
+%-------------------------------------------------------------------------

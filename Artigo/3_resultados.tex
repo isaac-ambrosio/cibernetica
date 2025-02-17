@@ -1,0 +1,95 @@
+\section{Resultados}
+
+Após realizadas as configurações necessárias para a execução do código, é iniciado o treinamento do modelo referência rtdetr\_r50vd\_6x\_coco.
+
+Com aproximadamente 1h de treinamento, são executadas as 100 épocas pré-definidas do modelo. Para este projeto está sendo adotado o AP50 (\textit{Average Precision} com IoU = 0.50), ou seja, uma detecção é considerada correta (True Positive) se a sobreposição entre a caixa predita e a caixa \textit{ground truth} for pelo menos 50\%.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imagens/AP50Buriti.png}
+    \caption{Evolução de AP50 ao longo de 100 épocas para a classe Buriti}
+    \label{fig:ap50buriti}
+\end{figure}
+
+
+Após executar as 100 épocas, o maior valor de AP50 é o da época 48 (AP=0,994). Para realizar o gráfico de AP50 por número de épocas, foi realizado um \textit{regex} no arquivo de log em busca dos termos chave e salvando o maior valor de AP \cref{fig:ap50buriti}.  
+
+Percebe-se uma tendência rápida de estabilização do valor de AP50 já na época de número 20, mantendo acima de 0,80 até o final do treinamento.
+
+Foi realizado o mesmo treinamento com a classe de Palmito, também com 100 épocas. Ao final, o maior valor de AP50 para esta classe foi de 0,715 na época 89. Neste caso, percebe-se uma diferença quanto à estabilização, tendo uma maior variação entre épocas do treinamento \cref{fig:ap50palmito}.
+
+Esse comportamento pode estar relacionado ao baixo número de imagens rotuladas para esta classe.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{imagens/AP50Palmito.png}
+    \caption{Evolução de AP50 ao longo de 100 épocas para a classe Palmito}
+    \label{fig:ap50palmito}
+\end{figure}
+
+
+
+
+ 
+Por fim, para testar a precisão do modelo referência treinado (rtdetr\_r50vd\_6x\_coco), foi feito um teste com duas imagens presente no dataset. Sendo a \cref{fig:resultado_buriti} a identificação de Buritis e a \cref{fig:resultado_palmito} o resultado da identificação de Palmito Juçara.
+
+Como pode ser observado, o modelo conseguiu identificar com precisão os indivíduos arbóreos presentes na imagem, mesmo aqueles de menor tamanho.
+
+No caso do Buriti, no canto superior há um indivíduo parcialmente, porém não foi identificado pelo detector. Já o Palmito Juçara, como o valor de AP50 apresentou um valor inferior, alguns indivíduos na imagem não foram rotulados pelo detector.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imagens/results_buriti.jpg}
+    \caption{Resultado da identificação de Buriti}
+    \label{fig:resultado_buriti}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{imagens/results_palmito.jpg}
+    \caption{Resultado da identificação de Palmito Juçara}
+    \label{fig:resultado_palmito}
+\end{figure}
+
+Na segunda abordagem, realizando o treinamento das duas classes simultaneamente, foi obtido um valor máximo de AP50 de 0.893 ao final das 100 épocas \ref{fig:resultado_comb}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imagens/Combinado.png}
+    \caption{Evolução de AP50 ao longo de 100 épocas para as classes Buriti e Palmito combinadas}
+    \label{fig:resultado_comb}
+\end{figure}
+
+
+
+O mesmo teste, nas mesmas imagens \ref{fig:resultado_buriti} e \ref{fig:resultado_palmito}, foi realizado e demonstrado a seguir (Figura \ref{fig:resultado_combinado}:
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imagens/results_comb.jpg}
+    \caption{Resultado da identificação de Buriti, quando combinado com Palmito}
+    \label{fig:resultado_combinado}
+\end{figure}
+
+Como observado, diferentemente quando treinado isoladamente, agora o modelo não conseguiu identificar com êxito todas os quatros indivíduos presentes na imagem, o que demonstra uma pequena queda de confiança no modelo, de acordo com o menor valor de AP50. 
+
+Com a execução do modelo RT-DETR no dataset, foi realizada uma tabela comparativa dos valores de AP50 para as duas abordagens (\cref{tab:resultados_ap50}).
+
+\begin{table}[H]
+\centering
+\caption{Comparativo de AP50 entre classes}
+\label{tab:resultados_ap50}
+\begin{tabular}{c|c|c|c}
+\toprule
+\textbf{Classe} & \textbf{AP50\_Max} & \textbf{AP50\_e50}  & \textbf{AP50\_e100}\\
+\midrule
+Buriti & 0.994 & 0.976 & 0.911 \\
+Palmito & 0.715 & 0.613 & 0.587 \\
+\midrule
+Buriti e Palmito & 0.893 & 0.545 & 0.527 \\
+ \bottomrule
+
+\end{tabular}
+\end{table}

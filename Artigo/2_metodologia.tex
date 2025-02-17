@@ -1,0 +1,41 @@
+\section{Metodologia}
+\label{sec:formatting}
+
+Para a obtenção do \textit{dataset} necessário para este projeto, foram utilizadas imagens capturadas por um drone DJI modelo Mavic3 de algumas visitas de campo na Reserva Ecológica do IBGE, com o suporte de biólogos e especialistas em botânica.
+
+A \cref{fig:mapa_reserva} apresenta as regiões que foram mapeadas durante as visitas de campo na Reserva, sendo em amarelo voos realizados em altura de 100m e em laranja voos mais baixos, em 40m. A área total mapeada é de aproximadamente 200ha, ou 15\% da área total da Reserva.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imagens/Reserva IBGE.jpg}
+    \caption{Regiões mapeadas da Reserva Ecológica}
+    \label{fig:mapa_reserva}
+\end{figure}
+
+Foram realizados voos em duas regiões que apresentam um tipo de vegetação típica da presença dessas duas espécies alvo, que é a Mata de Galeria, caracterizada por acompanhar os rios de pequeno porte e córregos. Ao todo foram capturadas 826 imagens RGB com resolução 5280 x 3965 pixels, totalizando uma área mapeada de 13,3ha \cref{fig:duas_areas}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imagens/duas areas.jpg}
+    \caption{Regiões consideradas no projeto}
+    \label{fig:duas_areas}
+\end{figure}
+
+
+Para realizar a rotulagem das imagens, foi utilizada a ferramenta gráfica \textit{labelImg} da linguagem Python, que permite que o usuário crie e edite \textit{bounding boxes} (caixas delimitadoras) sobre objetos de interesse. 
+
+Considerando somente as imagens rotuladas com a presença de pelo menos uma das duas espécies, foram identificadas 159 imagens com 390 marcações, sendo 151 marcações da espécie Buriti e 239 de Palmito Juçara. Dessas imagens, foi feita uma divisão, de forma randômica, de 60\% para treinamento, 20\% para validação e 20\% para teste.
+
+
+Considerando as limitações de hardware necessário para a execução dos códigos de aprendizagem profunda, optou-se por utilizar uma plataforma que permite a execução de código \textit{Python} diretamente na nuvem, sem necessidade de configuração local. Para este trabalho, foi utilizada a plataforma baseada em nuvem \textit{Colab} do Google que permite o acesso à GPUs diretamente pelo navegador.
+
+Optou-se ainda pela configuração Pro, que fornece recursos mais avançados como modelos de GPU com maior desempenho, maior espaço de armazenamento e mais memória RAM.
+
+
+O primeiro passo foi realizar um \textit{script} para a conversão da resolução das imagens para 640x640 pixels de modo a otimizar o uso de recursos computacionais, além de padronizar o conjunto de dados e manter a compatibilidade com arquiteturas populares de \textit{Deep Learning}.
+
+E para a conversão do formato das anotações, do formato YOLO (.txt), em anotações em arquivos .json no formato COCO, utilizado pelo método RT-DETR.
+
+
+Para este trabalho foi executado o modelo \textbf{rtdetr\_r50vd\_6x\_coco.yml} do \textit{rtdetr\_pytorch}, com 100 épocas e com duas abordagens. Na primeira realizou-se o treinamento das duas classes de forma separada e na segunda com um único treinamento com as duas classes juntas para ter um comparativo dos resultados.
+
